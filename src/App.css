@@ -1,0 +1,17 @@
+.hero-section{
+    background: url('https://i.ibb.co.com/Jr0L9Yr/3.png');
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .hero-section{
+        background: url('https://i.ibb.co.com/8cTB8x3/6.jpg');
+        background-size: cover;
+    background-position-x: 50%;
+    background-position-y: center;
+    }
+  }
+
+  
