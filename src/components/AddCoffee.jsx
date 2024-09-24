@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 const AddCoffee = () => {
   const handleAddCoffee = (event) => {
@@ -13,7 +14,8 @@ const AddCoffee = () => {
     const category = form.category.value;
     const details = form.details.value;
     const photo = form.photo.value;
-    const newCoffee = {name, chef, supplier, taste, category, details, photo};
+    const price = form.price.value;
+    const newCoffee = {name, price, chef, supplier, taste, category, details, photo};
     console.log(name, chef, supplier, taste, category, details, photo);
 
 
@@ -21,15 +23,40 @@ const AddCoffee = () => {
     fetch('http://localhost:5000/coffee', {
       method: 'POST',
       headers: {
-        'content-type' : 'application/json'
+        'content-type': 'application/json',
       },
-      body: JSON.stringify(newCoffee)
-
+      body: JSON.stringify(newCoffee),
     })
-    .then(res=>res.json())
-    .then(data => {
-      console.log(data)
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        form.reset();
+          // Check if data is received correctly
+        if (data.insertedId) {
+          Swal.fire({
+            title: 'Success!',
+            text: 'Coffee added successfully',
+            icon: 'success',
+            confirmButtonText: 'Cool',
+          });
+        } else {
+          Swal.fire({
+            title: 'Error!',
+            text: 'Failed to add coffee',
+            icon: 'error',
+            confirmButtonText: 'Try Again',
+          });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Something went wrong',
+          icon: 'error',
+          confirmButtonText: 'Okay',
+        });
+      });
   };
 
   return (
@@ -40,11 +67,22 @@ const AddCoffee = () => {
         <div className="grid md:grid-cols-2 gap-5">
           <label className="form-control w-full">
             <div className="label">
-              <span className="label-text">Name</span>
+              <span className="label-text">Coffee Name</span>
             </div>
             <input
               type="text"
               name="name"
+              placeholder="Type here"
+              className="input input-bordered w-full"
+            />
+          </label>
+          <label className="form-control w-full ">
+            <div className="label">
+              <span className="label-text">Price</span>
+            </div>
+            <input
+              type="number"
+              name="price"
               placeholder="Type here"
               className="input input-bordered w-full"
             />
@@ -104,7 +142,7 @@ const AddCoffee = () => {
               className="input input-bordered w-full"
             />
           </label>
-          <label className="form-control w-full md:col-span-2">
+          <label className="form-control w-full">
             <div className="label">
               <span className="label-text">Photo</span>
             </div>

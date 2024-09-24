@@ -1,11 +1,30 @@
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import "./App.css";
 import { LuCoffee } from "react-icons/lu";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { useState } from "react";
 
-function App() {
+const App = () => {
+
+  const coffees = useLoaderData();
+  const [selectedCoffee, setSelectedCoffee] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const viewDetails = (coffee) => {
+    setLoading(true);
+    setSelectedCoffee(coffee);
+
+    
+     // Simulate loading delay (optional) for showing loader effect
+     setTimeout(() => {
+      document.getElementById('my_modal_4').showModal();
+      setLoading(false);  // Stop loader when modal opens
+    }, 500);
+
+  }
+
   return (
     <>
       {/* Hero section*/}
@@ -104,285 +123,119 @@ function App() {
             </button></Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-12">
-            <div
-              className="flex justify-around items-center border rounded-md py-5"
-              style={{ backgroundColor: "#ECEAE3" }}
-            >
-              <div>
-                <img
-                  src="https://i.ibb.co.com/PYWY0D1/coffee5-min.png"
-                  alt=""
-                  className="w-[150px] h-[200px]"
-                />
-              </div>
-              <div>
-                <p className="text-xl leading-10">
-                  <strong>Name:</strong>{" "}
-                  <span style={{ color: "#5C5B5B" }}> Americano Coffee</span>
-                </p>
-                <p className="text-xl leading-10">
-                  <strong>Chef:</strong>{" "}
-                  <span style={{ color: "#5C5B5B" }}>Mr. Matin Paul</span>{" "}
-                </p>
-                <p className="text-xl leading-10">
-                  <strong>Price:</strong>{" "}
-                  <span style={{ color: "#5C5B5B" }}>890 Taka</span>{" "}
-                </p>
-              </div>
-              <div className="flex flex-col gap-3">
-                <button
-                  className="btn text-xl text-white bg-orange-300"
-                  style={{ width: "50px", height: "50px" }}
-                >
-                  <MdOutlineRemoveRedEye />
-                </button>
-                <button
-                  className="btn  text-xl text-white bg-stone-700"
-                  style={{ width: "50px", height: "50px" }}
-                >
-                  <MdEdit />
-                </button>
-                <button
-                  className="btn  text-xl text-white bg-red-400"
-                  style={{ width: "50px", height: "50px" }}
-                >
-                  <MdDelete />
-                </button>
-              </div>
-            </div>
+            
+            {
+              coffees.map(coffee => <div 
+                key={coffee._id}
+                className="flex justify-around items-center border rounded-md py-5"
+                style={{ backgroundColor: "#ECEAE3" }}>
+                <div>
+                  <img
+                    src={coffee.photo}
+                    alt=""
+                    className="w-[150px] h-[200px]"
+                  />
+                </div>
+                <div>
+                  <p className="text-xl leading-10">
+                    <strong>Name:</strong>{" "}
+                    <span style={{ color: "#5C5B5B" }}> {coffee.name}</span>
+                  </p>
+                  <p className="text-xl leading-10">
+                    <strong>Chef:</strong>{" "}
+                    <span style={{ color: "#5C5B5B" }}>{coffee.chef}</span>{" "}
+                  </p>
+                  <p className="text-xl leading-10">
+                    <strong>Category:</strong>{" "}
+                    <span style={{ color: "#5C5B5B" }}>{coffee.category}</span>{" "}
+                  </p>
+                  <p className="text-xl leading-10">
+                    <strong>Price:</strong>{" "}
+                    <span style={{ color: "#5C5B5B" }}>{coffee.price} Taka</span>{" "}
+                  </p>
+                </div>
+                <div className="flex flex-col gap-3">
+                  <button
+                    className="btn text-xl text-white bg-orange-300"
+                    style={{ width: "50px", height: "50px" }}
+                    onClick={()=>viewDetails(coffee)}
+                  >
+                    <MdOutlineRemoveRedEye />
+                  </button>
+                  <button
+                    className="btn  text-xl text-white bg-stone-700"
+                    style={{ width: "50px", height: "50px" }}
+                  >
+                    <MdEdit />
+                  </button>
+                  <button
+                    className="btn  text-xl text-white bg-red-400"
+                    style={{ width: "50px", height: "50px" }}
+                  >
+                    <MdDelete />
+                  </button>
+                </div>
+              </div>)
+            }
 
-            <div
-              className="flex justify-around items-center border rounded-md"
-              style={{ backgroundColor: "#ECEAE3" }}
-            >
-              <div>
-                <img
-                  src="https://i.ibb.co.com/Yj64Z9w/coffee2-min.png"
-                  alt=""
-                  className="w-[150px] h-[200px]"
-                />
-              </div>
-              <div>
-                <p className="text-xl leading-10">
-                  <strong>Name:</strong>{" "}
-                  <span style={{ color: "#5C5B5B" }}> Americano Coffee</span>
-                </p>
-                <p className="text-xl leading-10">
-                  <strong>Chef:</strong>{" "}
-                  <span style={{ color: "#5C5B5B" }}>Mr. Matin Paul</span>{" "}
-                </p>
-                <p className="text-xl leading-10">
-                  <strong>Price:</strong>{" "}
-                  <span style={{ color: "#5C5B5B" }}>890 Taka</span>{" "}
-                </p>
-              </div>
-              <div className="flex flex-col gap-3">
-                <button
-                  className="btn text-xl text-white bg-orange-300"
-                  style={{ width: "50px", height: "50px" }}
-                >
-                  <MdOutlineRemoveRedEye />
-                </button>
-                <button
-                  className="btn  text-xl text-white bg-stone-700"
-                  style={{ width: "50px", height: "50px" }}
-                >
-                  <MdEdit />
-                </button>
-                <button
-                  className="btn  text-xl text-white bg-red-400"
-                  style={{ width: "50px", height: "50px" }}
-                >
-                  <MdDelete />
-                </button>
-              </div>
-            </div>
 
-            <div
-              className="flex justify-around items-center border rounded-md"
-              style={{ backgroundColor: "#ECEAE3" }}
-            >
-              <div>
-                <img
-                  src="https://i.ibb.co.com/JFy7GzL/coffee1-min.png"
-                  alt=""
-                  className="w-[150px] h-[200px]"
-                />
-              </div>
-              <div>
-                <p className="text-xl leading-10">
-                  <strong>Name:</strong>{" "}
-                  <span style={{ color: "#5C5B5B" }}> Americano Coffee</span>
-                </p>
-                <p className="text-xl leading-10">
-                  <strong>Chef:</strong>{" "}
-                  <span style={{ color: "#5C5B5B" }}>Mr. Matin Paul</span>{" "}
-                </p>
-                <p className="text-xl leading-10">
-                  <strong>Price:</strong>{" "}
-                  <span style={{ color: "#5C5B5B" }}>890 Taka</span>{" "}
-                </p>
-              </div>
-              <div className="flex flex-col gap-3">
-                <button
-                  className="btn text-xl text-white bg-orange-300"
-                  style={{ width: "50px", height: "50px" }}
-                >
-                  <MdOutlineRemoveRedEye />
-                </button>
-                <button
-                  className="btn  text-xl text-white bg-stone-700"
-                  style={{ width: "50px", height: "50px" }}
-                >
-                  <MdEdit />
-                </button>
-                <button
-                  className="btn  text-xl text-white bg-red-400"
-                  style={{ width: "50px", height: "50px" }}
-                >
-                  <MdDelete />
-                </button>
-              </div>
-            </div>
-            <div
-              className="flex justify-around items-center border rounded-md"
-              style={{ backgroundColor: "#ECEAE3" }}
-            >
-              <div>
-                <img
-                  src="https://i.ibb.co.com/cvpfKk8/coffee3-min.png"
-                  alt=""
-                  className="w-[150px] h-[200px]"
-                />
-              </div>
-              <div>
-                <p className="text-xl leading-10">
-                  <strong>Name:</strong>{" "}
-                  <span style={{ color: "#5C5B5B" }}> Americano Coffee</span>
-                </p>
-                <p className="text-xl leading-10">
-                  <strong>Chef:</strong>{" "}
-                  <span style={{ color: "#5C5B5B" }}>Mr. Matin Paul</span>{" "}
-                </p>
-                <p className="text-xl leading-10">
-                  <strong>Price:</strong>{" "}
-                  <span style={{ color: "#5C5B5B" }}>890 Taka</span>{" "}
-                </p>
-              </div>
-              <div className="flex flex-col gap-3">
-                <button
-                  className="btn text-xl text-white bg-orange-300"
-                  style={{ width: "50px", height: "50px" }}
-                >
-                  <MdOutlineRemoveRedEye />
-                </button>
-                <button
-                  className="btn  text-xl text-white bg-stone-700"
-                  style={{ width: "50px", height: "50px" }}
-                >
-                  <MdEdit />
-                </button>
-                <button
-                  className="btn  text-xl text-white bg-red-400"
-                  style={{ width: "50px", height: "50px" }}
-                >
-                  <MdDelete />
-                </button>
-              </div>
-            </div>
-            <div
-              className="flex justify-around items-center border rounded-md"
-              style={{ backgroundColor: "#ECEAE3" }}
-            >
-              <div>
-                <img
-                  src="https://i.ibb.co.com/fx4X79P/coffee4-min.png"
-                  alt=""
-                  className="w-[150px] h-[200px]"
-                />
-              </div>
-              <div>
-                <p className="text-xl leading-10">
-                  <strong>Name:</strong>{" "}
-                  <span style={{ color: "#5C5B5B" }}> Americano Coffee</span>
-                </p>
-                <p className="text-xl leading-10">
-                  <strong>Chef:</strong>{" "}
-                  <span style={{ color: "#5C5B5B" }}>Mr. Matin Paul</span>{" "}
-                </p>
-                <p className="text-xl leading-10">
-                  <strong>Price:</strong>{" "}
-                  <span style={{ color: "#5C5B5B" }}>890 Taka</span>{" "}
-                </p>
-              </div>
-              <div className="flex flex-col gap-3">
-                <button
-                  className="btn text-xl text-white bg-orange-300"
-                  style={{ width: "50px", height: "50px" }}
-                >
-                  <MdOutlineRemoveRedEye />
-                </button>
-                <button
-                  className="btn  text-xl text-white bg-stone-700"
-                  style={{ width: "50px", height: "50px" }}
-                >
-                  <MdEdit />
-                </button>
-                <button
-                  className="btn  text-xl text-white bg-red-400"
-                  style={{ width: "50px", height: "50px" }}
-                >
-                  <MdDelete />
-                </button>
-              </div>
-            </div>
-            <div
-              className="flex justify-around items-center border rounded-md"
-              style={{ backgroundColor: "#ECEAE3" }}
-            >
-              <div>
-                <img
-                  src="https://i.ibb.co.com/QrXvr0R/coffee6-min.png"
-                  alt=""
-                  className="w-[150px] h-[200px]"
-                />
-              </div>
-              <div>
-                <p className="text-xl leading-10">
-                  <strong>Name:</strong>{" "}
-                  <span style={{ color: "#5C5B5B" }}> Americano Coffee</span>
-                </p>
-                <p className="text-xl leading-10">
-                  <strong>Chef:</strong>{" "}
-                  <span style={{ color: "#5C5B5B" }}>Mr. Matin Paul</span>{" "}
-                </p>
-                <p className="text-xl leading-10">
-                  <strong>Price:</strong>{" "}
-                  <span style={{ color: "#5C5B5B" }}>890 Taka</span>{" "}
-                </p>
-              </div>
-              <div className="flex flex-col gap-3">
-                <button
-                  className="btn text-xl text-white bg-orange-300"
-                  style={{ width: "50px", height: "50px" }}
-                >
-                  <MdOutlineRemoveRedEye />
-                </button>
-                <button
-                  className="btn  text-xl text-white bg-stone-700"
-                  style={{ width: "50px", height: "50px" }}
-                >
-                  <MdEdit />
-                </button>
-                <button
-                  className="btn  text-xl text-white bg-red-400"
-                  style={{ width: "50px", height: "50px" }}
-                >
-                  <MdDelete />
-                </button>
-              </div>
-            </div>
           </div>
+            {
+              selectedCoffee && (
+                <dialog id="my_modal_4" className="modal">
+                <div className="modal-box w-10/12 max-w-5xl">
+
+                {
+                  loading ? (
+                    <div className="flex justify-center items-center h-64">
+                  <div className="loader"></div> {/* Simple loader spinner */}
+                </div> 
+                  ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                  <div className="mx-auto">
+                    <img src={selectedCoffee.photo} alt={selectedCoffee.name} />
+                  </div>
+                  <div>
+                  <p className="text-xl leading-10">
+                    <strong>Name:</strong>{" "}
+                    <span style={{ color: "#5C5B5B" }}>{selectedCoffee.name}</span>{" "}
+                  </p>
+                  <p className="text-xl leading-10">
+                    <strong>Price:</strong>{" "}
+                    <span style={{ color: "#5C5B5B" }}>{selectedCoffee.price} Taka</span>{" "}
+                  </p>
+                  <p className="text-xl leading-10">
+                    <strong>Supplier:</strong>{" "}
+                    <span style={{ color: "#5C5B5B" }}>{selectedCoffee.supplier}</span>{" "}
+                  </p>
+                  <p className="text-xl leading-10">
+                    <strong>Taste:</strong>{" "}
+                    <span style={{ color: "#5C5B5B" }}>{selectedCoffee.taste}</span>{" "}
+                  </p>
+                  <p className="text-xl leading-10">
+                    <strong>Category:</strong>{" "}
+                    <span style={{ color: "#5C5B5B" }}>{selectedCoffee.category}</span>{" "}
+                  </p>
+                  <p className="text-xl leading-10">
+                    <strong>Details:</strong>{" "}
+                    <span style={{ color: "#5C5B5B" }}>{selectedCoffee.details}</span>{" "}
+                  </p>
+                  </div>
+                </div>
+                  )
+                }
+                  
+                  <div className="modal-action">
+                    <form method="dialog">
+                      {/* if there is a button, it will close the modal */}
+                      <button className="btn bg-orange-300">Close</button>
+                    </form>
+                  </div>
+                </div>
+              </dialog>
+              )
+            }
+
         </div>
       </div>
       {/* Follow on instagram*/}
