@@ -99,9 +99,9 @@ function App() {
             >
               Our Popular Products
             </h1>
-            <button className="btn border-1 text-2xl bg-orange-300">
+            <Link to="/addCoffee"><button className="btn border-1 text-2xl bg-orange-300">
               Add Coffee <LuCoffee />
-            </button>
+            </button></Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-12">
             <div

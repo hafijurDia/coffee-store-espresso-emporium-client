@@ -74,7 +74,7 @@ const Footer = () => {
                 className="text-3xl sm:text-3xl font-bold my-3"
                 style={{ color: "#331A15" }}
               >
-                Follow on Instagram
+                Connect with Us
               </h1>
 
               <form action="" className="gird md:grid-cols-1">
