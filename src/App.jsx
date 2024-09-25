@@ -29,7 +29,7 @@ const App = () => {
             </h1>
             <p className="text-white text-lg leading-normal my-5">
               It's coffee time - Sip & Savor - Relaxation in every sip! Get the
-              nostalgia back!! Your companion of every moment!!! Enjoy the
+              nostalgia back! Your companion of every moment!!! Enjoy the
               beautiful moments and make them memorable.
             </p>
             <button onClick={handleScrollToLearnMore} className="btn border-0 text-2xl bg-orange-300">
