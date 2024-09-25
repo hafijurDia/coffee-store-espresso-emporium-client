@@ -8,6 +8,7 @@ const AddCoffee = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to top when component loads
   }, []);
+  
   const handleAddCoffee = (event) => {
     event.preventDefault();
     const form = event.target;
