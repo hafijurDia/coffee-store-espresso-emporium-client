@@ -11,7 +11,13 @@ const App = () => {
   const loadedCoffees = useLoaderData();
   const [coffees, setCoffees] = useState(loadedCoffees);
  
-
+  const handleScrollToLearnMore = (event) => {
+    event.preventDefault();
+    const section = document.getElementById('learnmore');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   return (
     <>
       {/* Hero section*/}
@@ -26,14 +32,14 @@ const App = () => {
               nostalgia back!! Your companion of every moment!!! Enjoy the
               beautiful moments and make them memorable.
             </p>
-            <button className="btn border-0 text-2xl bg-orange-300">
+            <button onClick={handleScrollToLearnMore} className="btn border-0 text-2xl bg-orange-300">
               Learn More
             </button>
           </div>
         </div>
       </div>
       {/* coffee card section*/}
-      <div className="card-section" style={{ backgroundColor: "#ECEAE3" }}>
+      <div className="card-section" id="learnmore" style={{ backgroundColor: "#ECEAE3" }}>
         <div className="container mx-auto md:flex gap-5 pt-10 pb-6">
           <div className="card">
             <div className="text-left pt-5 pl-5">

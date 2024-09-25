@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useLoaderData } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { GoArrowLeft } from "react-icons/go";
 
 
 const UpdateCoffee = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to top when component loads
+      }, []);
+
     const coffee = useLoaderData();
-
-
     const handleUpdateCoffee = (event) => {
         event.preventDefault();
     const form = event.target;
@@ -67,9 +70,15 @@ const UpdateCoffee = () => {
 
     return (
         <div className="container mx-auto px-4">
-    <Link to="/">Back to home</Link>
-      <h1 className="text-6xl text-purple-600 text-center">Upate Coffee</h1>
-      <form onSubmit={handleUpdateCoffee}>
+   <Link to="/"><button className="btn mt-5 bg-orange-300 text-base mb-8"><GoArrowLeft /> Back to home</button></Link>
+
+      <form onSubmit={handleUpdateCoffee}  className="p-14 border rounded" style={{backgroundColor:"#F4F3F0"}}>
+      <h1 className="text-4xl text-black text-center">Update Coffee</h1>
+      <p className="text-gray-600 text-lg leading-normal my-5 text-center mx-auto w-full md:w-1/2">
+              It's coffee time - Sip & Savor - Relaxation in every sip! Get the
+              nostalgia back!! Your companion of every moment!!! Enjoy the
+              beautiful moments and make them memorable.
+            </p>
         <div className="grid md:grid-cols-2 gap-5">
           <label className="form-control w-full">
             <div className="label">
